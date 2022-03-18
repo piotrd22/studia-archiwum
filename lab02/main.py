@@ -1,20 +1,19 @@
 #Funkcja kopcująca
-kopiec = [2,6,3,3,4,5,7,8,6,9]
-#
+kopiec = [2,6,3,3,4,5,7,8,6,7]
+
 def heapify(heap, heapLen, index):
     r = 2*index + 2 #right son
     l = 2*index + 1 #left son
     if heapLen > l and heap[l] > heap[index] :
-        if heapLen > r and heap[l] < heap[r]:
-            largest = r
-        else:
-            largest = l
-        heap[index], heap[largest] = heap[largest], heap[index]
-        heapify(heap, heapLen, largest)
+        largest = l
     else:
         largest = index
+    if heapLen > r and heap[r] > heap[largest]:
+        largest = r
+    if largest != index:
+        heap[index], heap[largest] = heap[largest], heap[index]
+        heapify(heap, heapLen, largest)
     return heap
-
 
 #budowanie kopca
 
@@ -31,7 +30,7 @@ def buildHeap(heap):
 def heapSort(heap):
     heap = buildHeap(heap)
     heapLen = len(heap)
-    for i in range(len(heap), 0, -1):
+    for i in range(len(heap)-1, 0, -1):
         heap[0], heap[heapLen-1] = heap[heapLen-1], heap[0]
         heapLen -= 1
         heapify(heap, heapLen, 0)
@@ -39,28 +38,22 @@ def heapSort(heap):
 
 # heapify v2
 def heapify2(heap, heapLen, index):
-    largest = 'c'
-    while largest != index:
+    done = True
+    while done:
+        largest = index
         r = 2 * index + 2  # right son
         l = 2 * index + 1  # left son
         if heapLen > l and heap[l] > heap[index]:
-            if heapLen > r and heap[l] < heap[r]:
-                largest = r
-            else:
-                largest = l
-            heap[index], heap[largest] = heap[largest], heap[index]
+            largest = l
         else:
             largest = index
-    r = 2*index + 2 #right son
-    l = 2*index + 1 #left son
-    if heapLen > l and heap[l] > heap[index] :
-        if heapLen > r and heap[l] < heap[r]:
+        if heapLen > r and heap[r] > heap[largest]:
             largest = r
+        if largest != index:
+            heap[index], heap[largest] = heap[largest], heap[index]
+            index = largest
         else:
-            largest = l
-        heap[index], heap[largest] = heap[largest], heap[index]
-    else:
-        largest = index
+            done = False
     return heap
 
 def buildHeap2(heap):
@@ -68,7 +61,7 @@ def buildHeap2(heap):
     father = (heapLen-2) // 2
 
     for i in range(father, -1, -1):
-        heapify2(heap, heapLen, i)
+        heapify2(heap, heapLen,i)
     return heap
 
 # heapSort
@@ -79,11 +72,12 @@ def heapSort2(heap):
     for i in range(len(heap), 0, -1):
         heap[0], heap[heapLen-1] = heap[heapLen-1], heap[0]
         heapLen -= 1
-        heapify2(heap, heapLen, 0)
+        heapify2(heap, heapLen,0)
     return heap
 
-print(heapify2(kopiec, 8, 0))
-print(heapify(kopiec, 8, 0))
-print(heapSort(kopiec))
+print(heapify2(kopiec, 10,0))
 print(heapSort2(kopiec))
+print(heapify(kopiec, 10, 0))
+print(buildHeap(kopiec))
+print(heapSort(kopiec))
 
