@@ -75,9 +75,23 @@ def heapSort2(heap):
         heapify2(heap, heapLen,0)
     return heap
 
-print(heapify2(kopiec, 10,0))
-print(heapSort2(kopiec))
-print(heapify(kopiec, 10, 0))
-print(buildHeap(kopiec))
-print(heapSort(kopiec))
 
+
+def listffile(file):
+    filez = open(file, "r")
+    matrix = []
+    for line in filez:
+        matrix.append(int(line))
+    return matrix
+
+
+def listtofile(file, new):
+    lines = new
+    for i in range(len(lines)):
+        lines[i] = str(lines[i])+"\n"
+    score_txt = open(file, "w")
+    score_txt.writelines(lines)
+    score_txt.close()
+
+macierz = listffile('matrix.txt')
+listtofile('odp.txt', heapSort(macierz))
