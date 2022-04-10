@@ -1,3 +1,5 @@
+from timeit import default_timer as timer
+
 def partition(A,p,r):
     x=A[r]
     i=p-1
@@ -44,3 +46,22 @@ def modifiedquicksort(A):
 
     return bqs(A, 0, len(A) - 1)
 print(modifiedquicksort([1,2,3,4,5,6,7,8,9,10,1]))
+
+arr = [6,3,8,10,14,12,9]
+arr2 = [1,2,3,4,5,6,7,8,9]
+
+start = timer()
+modifiedquicksort(arr2)
+stop = timer()
+Tn = stop-start
+print(Tn)
+
+#DANE LOSOWE
+#mod == 1.4100000000002999e-05
+#nie mod == 1.3700000000005375e-05
+
+#DANE NIEKORZYSTNE
+#mod == 5.58000000000225e-05
+#nie mod == 0.0003576999999999886
+
+# ALGORYTM PODSTAWOWY W OBU PRZYPADKACH JEST SZYBSZY
