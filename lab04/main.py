@@ -11,45 +11,41 @@ class LinkedList:
         self.head.prev = self.head
 
     def listInsert(self, k): 
-    # wstawia wezel x do listy L
     # lista z wartownikiem
-        x=Node(k)
+        lista=Node(k)
         if self.head.next == self.head:
-            self.head.prev = x
-        x.next = self.head.next
-        self.head.next = x
-        x.prev = self.head
-        x.next.prev = x
+            self.head.prev = lista
+        lista.next = self.head.next
+        self.head.next = lista
+        lista.prev = self.head
+        lista.next.prev = lista
 
     def listSearch(self,k):
     # szuka wezla zawierajacego klucz k
     # lista z wartownikiem
-        x = self.head.next
-        while x.key != None:
-            if x.key==k:
-                return x
-            x=x.next
-        return None 
-    # wynik “none” oznacza, ze szukanego klucza nie ma na liscie 
+        lista = self.head.next
+        while lista.key != None:
+            if lista.key==k:
+                return lista
+            lista = lista.next
+        return None
 
-    def listDelete(self,x):
-    # usuwa wezel x z listy
+    def listDelete(self,wezel):
     # lista z wartownikiem
-        x=self.listSearch(x)
-        x.prev.next = x.next
-        x.next.prev = x.prev
+        wezel = self.listSearch(wezel)
+        wezel.prev.next = wezel.next
+        wezel.next.prev = wezel.prev
 
     def listPrint(self):
         list = [self.head.key]
-        x=self.head
+        x = self.head
         while x.next.key!=None:
-            x=x.next
+            x = x.next
             list.append(x.key)
         print(list)
 
     def noRedundant(self):
         list = LinkedList()
-        #used = []
         x = self.head
         while x.next.key!=None:
             #if (x.next.key not in used):
