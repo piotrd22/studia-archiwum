@@ -1,0 +1,20 @@
+{
+  "name": "lab08",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.17.10",
+    "@babel/node": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "eslint": "^8.15.0",
+    "nodemon": "^2.0.16"
+  },
+  "scripts": {
+    "zad1": "npx nodemon --exec babel-node src/reduce.js",
+    "zad2": "npx nodemon --exec babel-node src/objects.js",
+    "zad3": "npx nodemon --exec babel-node src/creatingObjects.js",
+    "babel": "babel src -d es5out"
+  }
+}
