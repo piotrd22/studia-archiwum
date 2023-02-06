@@ -1,1 +1,1 @@
-# This is an archive of some classes from my studies.
+# This is an archive of some of my university classes
