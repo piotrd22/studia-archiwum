@@ -1,0 +1,7 @@
+[coverage:run]
+omit =
+    app/SMTP.py
+    app/api.py
+    app/test_api/
+    */site-packages/*
+    .venv/*
