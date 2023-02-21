@@ -104,7 +104,3 @@ func fourtDifferentWay() {
 		fmt.Scan(&userNumber)
 	}
 }
-
-func additionalTask() {
-	// TODO
-}
