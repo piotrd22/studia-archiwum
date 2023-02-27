@@ -1,0 +1,7 @@
+The expression if cannot be defined in terms of cond in the way that new-if is defined, because the behavior of if and cond is not exactly the same.
+
+The if expression in Scheme is a special form, meaning that it has its own evaluation rules that are built into the language. Specifically, when evaluating an if expression, Scheme evaluates the condition argument first, and then evaluates either the consequence or alternative expression, depending on whether the condition evaluates to true or false. Only one of the two expressions is ever evaluated.
+
+In contrast, the cond expression in Scheme is a general form that allows for multiple conditions and expressions to be evaluated. It evaluates each condition in order until it finds one that is true, and then evaluates the corresponding expression. If none of the conditions are true, cond evaluates the final else clause, which must be present.
+
+Therefore, the new-if definition using cond would not work in all cases, since it would always evaluate both the consequence and alternative expressions. This could lead to unexpected behavior or errors in cases where the expressions have side effects or depend on short-circuit evaluation.
