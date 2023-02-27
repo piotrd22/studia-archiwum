@@ -1,1 +1,1 @@
-# Modelowanie matematyczne
+# Modelowanie matematyczne - Math modeling

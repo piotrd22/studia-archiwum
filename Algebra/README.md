@@ -1,1 +1,1 @@
-# Algebra Liniowa
+# Linear algebra
