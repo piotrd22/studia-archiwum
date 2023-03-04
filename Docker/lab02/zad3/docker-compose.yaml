@@ -1,0 +1,21 @@
+version: "3.4"
+
+services:
+  zad3:
+    container_name: zad3
+    image: zad3
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
