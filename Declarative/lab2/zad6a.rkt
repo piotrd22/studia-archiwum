@@ -6,3 +6,4 @@
       (* n (factorial (- n 1)))))
 
 (factorial 4)
+(factorial 0)
