@@ -1,7 +1,8 @@
 package main
 
 import (
-	"github.com/piotrd22/studia-archiwum/Go/lab02/async"
+	// "github.com/piotrd22/studia-archiwum/Go/lab02/async"
+	"github.com/piotrd22/studia-archiwum/Go/lab02/zad"
 )
 
 func main() {
@@ -34,7 +35,9 @@ func main() {
 	// var input string
 	// fmt.Scanln(&input)
 
-	async.SelectDemo()
+	// async.SelectDemo()
+
+	zad.EvaluateBig()
 }
 
 func Fibonacci(x int) int {
