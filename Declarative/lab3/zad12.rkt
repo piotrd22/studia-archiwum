@@ -3,7 +3,7 @@
 (define (filter-accumulate combiner null-value term a next b pred)
   (if (> a b)
       null-value
-      (if (pred a)
+      (if (pred a b)
           (combiner (term a) (filter-accumulate combiner null-value term (next a) next b pred))
           (filter-accumulate combiner null-value term (next a) next b pred))))
 
@@ -16,4 +16,15 @@
                       ((zero? (modulo n i)) #f)
                       (else (loop (+ i 2))))))))
 
-(filter-accumulate + 0 (lambda (x) x) 1 (lambda (x) (+ x 1)) 5 (lambda (x) (prime? x)))
+(filter-accumulate + 0 (lambda (x) x) 1 (lambda (x) (+ x 1)) 5 (lambda (x y) (prime? x)))
+
+(define (gcd a b)
+  (if (= b 0)
+      a
+      (gcd b (modulo a b))))
+
+
+(define (coprime? a b)
+  (= (gcd a b) 1))
+
+(filter-accumulate * 1 (lambda (x) x) 1 (lambda (x) (+ x 1)) 5 (lambda (x y) (coprime? x y)))
