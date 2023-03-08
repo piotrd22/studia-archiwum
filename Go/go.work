@@ -3,4 +3,5 @@ go 1.20
 use (
 	./lab01/additional
 	./lab02
+	./lab03
 )
