@@ -20,9 +20,14 @@ public class Main {
 
         stack.printStack();
         System.out.println(stack.getSize());
+        System.out.println(stack.peek());
 
         stack.pop();
 
+        stack.printStack();
+        System.out.println(stack.getSize());
+
+        stack.push(30);
         stack.printStack();
         System.out.println(stack.getSize());
     }
