@@ -30,6 +30,13 @@ public class Stack {
         this.top += 1;
     }
 
+    public int peek() {
+        if(this.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        return this.stack[this.top];
+    }
+
     public int getSize() {
         return this.top + 1;
     }
