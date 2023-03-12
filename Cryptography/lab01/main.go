@@ -4,6 +4,10 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
+
+	"github.com/piotrd22/studia-archiwum/Cryptography/lab01/cezar"
+	"github.com/piotrd22/studia-archiwum/Cryptography/lab01/files"
 )
 
 // const alphabet = "abcdefghijklmnopqrstuvwxyz"
@@ -23,7 +27,7 @@ func main() {
 	}
 
 	cipher := os.Args[1]
-	// action := os.Args[2]
+	action := os.Args[2]
 
 	var key int
 	var a, b int
@@ -35,11 +39,21 @@ func main() {
 		if key < 1 || key > 25 {
 			log.Fatal("Invalid key")
 		}
+		files.WriteToFile("data/key.txt", strconv.Itoa(key))
 
 	case "-a":
 		fmt.Print("Enter the key (two integers a and b separated by a space): ")
 		fmt.Scanln(&a, &b)
 
+	default:
+		log.Fatal("Invalid flag")
+	}
+
+	switch action {
+	case "-e":
+		cezar.EncryptMessage()
+	case "-d":
+		cezar.DecryptMessage()
 	default:
 		log.Fatal("Invalid flag")
 	}
