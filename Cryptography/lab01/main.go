@@ -52,6 +52,8 @@ func main() {
 	switch action {
 	case "-e":
 		cezar.EncryptMessage()
+	case "-d":
+		cezar.DecryptMessage()
 	default:
 		log.Fatal("Invalid flag")
 	}
