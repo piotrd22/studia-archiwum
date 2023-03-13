@@ -2,15 +2,15 @@
 
 PORT=80
 
-# docker-compose up lab03zad1 # -- with our compose or just command with volume
+# docker-compose up lab03zad1 # -- with compose or just command with volume -- I added a compose file rather in the form of notes
 docker build . -t lab03zad1
 docker run -p $PORT:80 -v C:/Users/"Piotr Damrych"/Desktop/UCZELNIA/studia-archiwum/Docker/lab03/zad1/index.html:/usr/share/nginx/html/index.html:ro -d lab03zad1
 
-# Test the Nginx server
-if [[ $(curl -s localhost:$PORT) == *"Hello World!"* ]]; then
-  echo "Nginx server is working correctly."
+status_code=$(curl --write-out %{http_code} --silent --output /dev/null http://localhost:$PORT)
+if [[ "$status_code" -ne 200 ]] ; then
+  echo "Server is not running properly"
 else
-  echo "Nginx server is not working correctly."
+  echo "Server is running properly"
 fi
 
 docker stop $(docker ps -q --filter ancestor=lab03zad1)
