@@ -28,9 +28,8 @@
 ;;; ; Appending two lists together
 ;;; (append '(1 2 3) '(4 5 6)) ; Output: (1 2 3 4 5 6)
 
-
 (define test_list '(1 8 3 10 -34))
-(define test_list2 '(12 14 16 ))
+(define test_list2 '(12 14 16))
 
 ;;; a)
 (define (append2 l m)
