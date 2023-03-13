@@ -1,0 +1,10 @@
+The expression ((comb square double) 5) is evaluated as follows:
+
+    (comb square double) is called with argument 5.
+    comb takes square and double as arguments and returns a new function that takes an argument x, applies double to it, and then applies square to the result. So, the result of (comb square double) is equivalent to (lambda (x) (square (double x))).
+    (lambda (x) (square (double x))) is called with argument 5.
+    The argument 5 is passed to double, which returns 10.
+    The result of double is passed to square, which returns 100.
+    The final result of ((comb square double) 5) is 100.
+
+So, the expression ((comb square double) 5) evaluates to 100.
