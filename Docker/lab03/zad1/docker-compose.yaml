@@ -1,0 +1,12 @@
+version: "3.4"
+
+services:
+  lab03zad1:
+    image: lab03zad1
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html
