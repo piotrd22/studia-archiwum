@@ -53,3 +53,30 @@ func WriteToFile(filename string, text string) {
 	textWriter.Flush()
 	defer file.Close()
 }
+
+func AppendToFile(filename string, text string) {
+	_, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		fileCreate, err := os.Create(filename)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer fileCreate.Close()
+	}
+
+	file, err := os.OpenFile(filename, os.O_APPEND|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	textWriter := bufio.NewWriter(file)
+
+	_, err = textWriter.WriteString(text)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	textWriter.Flush()
+	defer file.Close()
+}
