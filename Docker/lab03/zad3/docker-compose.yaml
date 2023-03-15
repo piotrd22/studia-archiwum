@@ -1,7 +1,7 @@
 version: "3.4"
 
 services:
-  app:
+  lab03-app:
     image: app
     container_name: app
     build:
@@ -12,11 +12,9 @@ services:
     ports:
       - "3000:3000"
 
-  nginx:
-    image: nginx
-    container_name: nginx
+  lab03-nginx:
     build:
-      context: ./ngnix
+      context: ./nginx
       dockerfile: ./Dockerfile
     ports:
       - "80:80"
