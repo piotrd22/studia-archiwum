@@ -34,26 +34,42 @@ func main() {
 
 	switch cipher {
 	case "-c":
-		fmt.Print("Enter the key (an integer from 1 to 25): ")
-		fmt.Scanln(&key)
-		if key < 1 || key > 25 {
-			log.Fatal("Invalid key")
+		fmt.Println("Cezar!")
+
+		switch action {
+		case "-e":
+			fmt.Print("Enter the key (an integer from 1 to 25): ")
+			fmt.Scanln(&key)
+
+			if key < 1 || key > 25 {
+				log.Fatal("Invalid key")
+			}
+
+			files.WriteToFile("data/key.txt", strconv.Itoa(key))
+
+			cezar.EncryptMessage()
+			fmt.Println("All done")
+
+		case "-d":
+			decrypt := cezar.DecryptMessage()
+			fmt.Println("Dectypted message is " + decrypt)
+
+		case "-j":
+			key := cezar.FindKey()
+			fmt.Println("Key is " + key)
+
+		case "-k":
+			info := cezar.AllCodes()
+			fmt.Println(info)
+
+		default:
+			log.Fatal("Invalid flag")
 		}
-		files.WriteToFile("data/key.txt", strconv.Itoa(key))
 
 	case "-a":
 		fmt.Print("Enter the key (two integers a and b separated by a space): ")
 		fmt.Scanln(&a, &b)
 
-	default:
-		log.Fatal("Invalid flag")
-	}
-
-	switch action {
-	case "-e":
-		cezar.EncryptMessage()
-	case "-d":
-		cezar.DecryptMessage()
 	default:
 		log.Fatal("Invalid flag")
 	}

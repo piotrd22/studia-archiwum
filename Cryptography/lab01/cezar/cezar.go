@@ -1,6 +1,7 @@
 package cezar
 
 import (
+	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -95,4 +96,76 @@ func DecryptMessage() string {
 	files.WriteToFile("data/decrypt.txt", message_to_save)
 
 	return message_to_save
+}
+
+func FindKey() string {
+	crypto := files.ReadFromFile("data/crypto.txt")
+	crypto = strings.ReplaceAll(crypto, "\n", " ")
+	crypto = strings.ReplaceAll(crypto, " ", "")
+
+	extra := files.ReadFromFile("data/extra.txt")
+	extra = strings.ReplaceAll(extra, "\n", " ")
+	extra = strings.ReplaceAll(extra, " ", "")
+
+	var found_key string
+
+	for i, letter := range crypto {
+		if (letter > 64 && letter < 91) || (letter > 96 && letter < 123) {
+			key := (int(letter) - int(extra[i])) % 26
+
+			if key < 0 {
+				key = 26 + key
+			}
+
+			found_key = strconv.Itoa(key)
+
+			files.WriteToFile("data/key-found.txt", found_key)
+
+			return found_key
+		}
+	}
+
+	found_key = "Key did not found"
+
+	return found_key
+}
+
+func AllCodes() string {
+	message := ""
+
+	files.WriteToFile("data/decrypt.txt", "")
+
+	cryptogram := files.ReadFromFile("data/crypto.txt")
+	crypto := strings.ReplaceAll(cryptogram, " ", "\n")
+
+	for key := 1; key < 26; key++ {
+		key = key % 26
+
+		msg := []rune(crypto)
+
+		for i := 0; i < len(msg); i++ {
+			intMsg := int(msg[i])
+			if intMsg > 64 && intMsg < 91 {
+				intMsg -= key
+				if intMsg < 65 {
+					intMsg += 26
+				}
+			}
+
+			if intMsg > 96 && intMsg < 123 {
+				intMsg -= key
+				if intMsg < 97 {
+					intMsg += 26
+				}
+			}
+			message += string(rune(intMsg))
+		}
+
+		message_to_save := strings.ReplaceAll(message, "\n", " ")
+		files.AppendToFile("data/decrypt.txt", fmt.Sprintf("%v\n", message_to_save))
+
+		message = ""
+	}
+
+	return "All done"
 }
