@@ -104,15 +104,25 @@ func DecryptMessage() string {
 		intMsg := int(msg[i])
 		if intMsg > 64 && intMsg < 91 {
 			intMsg = a * (intMsg - b)
-			for intMsg > 90 {
-				intMsg -= 26
+
+			if intMsg < 65 {
+				intMsg += 26
+			} else {
+				for intMsg > 90 {
+					intMsg -= 26
+				}
 			}
 		}
 
 		if intMsg > 96 && intMsg < 123 {
 			intMsg = a * (intMsg - b)
-			for intMsg > 122 {
-				intMsg -= 26
+
+			if intMsg < 97 {
+				intMsg += 26
+			} else {
+				for intMsg > 122 {
+					intMsg -= 26
+				}
 			}
 		}
 		message += string(rune(intMsg))
@@ -151,10 +161,8 @@ func FindKey() string {
 				if intMsg > 64 && intMsg < 91 {
 					intMsg = a * (intMsg - b)
 
-					if a == 1 {
-						if intMsg < 65 {
-							intMsg += 26
-						}
+					if intMsg < 65 {
+						intMsg += 26
 					} else {
 						for intMsg > 90 {
 							intMsg -= 26
@@ -165,10 +173,8 @@ func FindKey() string {
 				if intMsg > 96 && intMsg < 123 {
 					intMsg = a * (intMsg - b)
 
-					if a == 1 {
-						if intMsg < 97 {
-							intMsg += 26
-						}
+					if intMsg < 97 {
+						intMsg += 26
 					} else {
 						for intMsg > 122 {
 							intMsg -= 26
@@ -217,10 +223,8 @@ func AllCodes() string {
 				if intMsg > 64 && intMsg < 91 {
 					intMsg = a * (intMsg - b)
 
-					if a == 1 {
-						if intMsg < 65 {
-							intMsg += 26
-						}
+					if intMsg < 65 {
+						intMsg += 26
 					} else {
 						for intMsg > 90 {
 							intMsg -= 26
@@ -231,10 +235,8 @@ func AllCodes() string {
 				if intMsg > 96 && intMsg < 123 {
 					intMsg = a * (intMsg - b)
 
-					if a == 1 {
-						if intMsg < 97 {
-							intMsg += 26
-						}
+					if intMsg < 97 {
+						intMsg += 26
 					} else {
 						for intMsg > 122 {
 							intMsg -= 26
