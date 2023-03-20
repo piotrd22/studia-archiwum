@@ -7,7 +7,7 @@ import (
 	"strconv"
 
 	"github.com/piotrd22/studia-archiwum/Cryptography/lab01/affine"
-	"github.com/piotrd22/studia-archiwum/Cryptography/lab01/cezar"
+	"github.com/piotrd22/studia-archiwum/Cryptography/lab01/caesar"
 	"github.com/piotrd22/studia-archiwum/Cryptography/lab01/files"
 )
 
@@ -33,7 +33,7 @@ func main() {
 
 	switch cipher {
 	case "-c":
-		fmt.Println("Cezar!")
+		fmt.Println("Caesar!")
 
 		switch action {
 		case "-e":
@@ -46,19 +46,19 @@ func main() {
 
 			files.WriteToFile("data/key.txt", strconv.Itoa(key))
 
-			cezar.EncryptMessage()
+			caesar.EncryptMessage()
 			fmt.Println("All done")
 
 		case "-d":
-			decrypt := cezar.DecryptMessage()
+			decrypt := caesar.DecryptMessage()
 			fmt.Println("Dectypted message is " + decrypt)
 
 		case "-j":
-			key := cezar.FindKey()
+			key := caesar.FindKey()
 			fmt.Println("Key is " + key)
 
 		case "-k":
-			info := cezar.AllCodes()
+			info := caesar.AllCodes()
 			fmt.Println(info)
 
 		default:
