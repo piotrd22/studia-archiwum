@@ -6,11 +6,10 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/piotrd22/studia-archiwum/Cryptography/lab01/affine"
 	"github.com/piotrd22/studia-archiwum/Cryptography/lab01/cezar"
 	"github.com/piotrd22/studia-archiwum/Cryptography/lab01/files"
 )
-
-// const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
 func main() {
 	if len(os.Args) != 3 {
@@ -67,8 +66,37 @@ func main() {
 		}
 
 	case "-a":
-		fmt.Print("Enter the key (two integers a and b separated by a space): ")
-		fmt.Scanln(&a, &b)
+		fmt.Println("Affine!")
+
+		switch action {
+		case "-e":
+			fmt.Println("Enter the key (two integers a and b separated by a space): ")
+			fmt.Scanln(&a, &b)
+
+			if a < 1 || a > 25 || b < 1 || b > 25 {
+				log.Fatal("Invalid key")
+			}
+
+			files.WriteToFile("data/key.txt", fmt.Sprintf("%v %v", a, b))
+
+			affine.EncryptMessage()
+			fmt.Println("All done")
+
+		case "-d":
+			decrypt := affine.DecryptMessage()
+			fmt.Println("Dectypted message is " + decrypt)
+
+		case "-j":
+			key := affine.FindKey()
+			fmt.Println("Keys are " + key)
+
+		case "-k":
+			info := affine.AllCodes()
+			fmt.Println(info)
+
+		default:
+			log.Fatal("Invalid flag")
+		}
 
 	default:
 		log.Fatal("Invalid flag")
