@@ -125,7 +125,7 @@ func FindKey() string {
 		}
 	}
 
-	found_key = "Key did not found"
+	found_key = "Key was not found"
 
 	return found_key
 }
