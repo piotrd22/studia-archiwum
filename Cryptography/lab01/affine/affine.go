@@ -6,9 +6,20 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/fxtlabs/primes"
 	"github.com/piotrd22/studia-archiwum/Cryptography/lab01/files"
 )
+
+var tableOfCoprimes = []int{1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25}
+
+func contains(s []int, x int) bool {
+	for _, v := range s {
+		if v == x {
+			return true
+		}
+	}
+
+	return false
+}
 
 func EncryptMessage() string {
 	crypto := ""
@@ -28,7 +39,7 @@ func EncryptMessage() string {
 		log.Fatal("Invalid key")
 	}
 
-	if !primes.Coprime(a, 26) {
+	if !contains(tableOfCoprimes, a) {
 		log.Fatal("A has to be Coprime with 26!")
 	}
 
@@ -91,7 +102,7 @@ func DecryptMessage() string {
 		log.Fatal("Invalid key")
 	}
 
-	if !primes.Coprime(a, 26) {
+	if !contains(tableOfCoprimes, a) {
 		log.Fatal("A has to be Coprime with 26!")
 	}
 
@@ -147,8 +158,6 @@ func FindKey() string {
 	var keyB string
 
 	message := ""
-
-	tableOfCoprimes := [...]int{1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25}
 
 	msg := []rune(crypto)
 
@@ -209,8 +218,6 @@ func AllCodes() string {
 
 	cryptogram := files.ReadFromFile("data/crypto.txt")
 	crypto := strings.ReplaceAll(cryptogram, " ", "\n")
-
-	tableOfCoprimes := [...]int{1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25}
 
 	msg := []rune(crypto)
 

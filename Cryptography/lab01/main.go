@@ -1,3 +1,6 @@
+// Copyrights
+// Piotr Damrych
+
 package main
 
 import (
