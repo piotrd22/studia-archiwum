@@ -119,7 +119,7 @@ func FindKey() string {
 
 			found_key = strconv.Itoa(key)
 
-			files.WriteToFile("data/key-new.txt", found_key)
+			files.WriteToFile("data/key-found.txt", found_key)
 
 			return found_key
 		}

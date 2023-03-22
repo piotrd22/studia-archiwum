@@ -2,7 +2,7 @@
 
 # Uruchamianie
 
-./lab01.exe <p1> <p2> lub go run main.go <p1> <p2>
+./lab01.exe <p1> <p2> lub go run cezar.go <p1> <p2>
 
 # Parametry
 
@@ -21,7 +21,7 @@
 # Inne
 
 Pliki z danymi znajdują się w folderze `/data`
-Plik główny nazywa się `main.go`
+Plik główny nazywa się `cezar.go`
 Plik wykonywalny .exe nazywa się `lab01.exe`
 Plik z szyfrem cezara jest w folderze `/ceasar`
 Plik z szyfrem afinicznym jest w folderze `/affine`

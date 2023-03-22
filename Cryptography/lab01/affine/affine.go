@@ -28,8 +28,8 @@ func EncryptMessage() string {
 	key_string := files.ReadFromFile("data/key.txt")
 	keys := strings.Split(key_string, " ")
 
-	a, err := strconv.Atoi(keys[0])
-	b, err2 := strconv.Atoi(keys[1])
+	a, err := strconv.Atoi(keys[1])
+	b, err2 := strconv.Atoi(keys[0])
 
 	if err != nil || err2 != nil {
 		log.Fatal(err)
@@ -59,10 +59,7 @@ func EncryptMessage() string {
 		}
 
 		if intMsg > 96 && intMsg < 123 {
-			intMsg = a*intMsg + b
-			for intMsg > 122 {
-				intMsg -= 26
-			}
+			intMsg = ((a*(intMsg-97) + b) % 26) + 97
 		}
 		crypto += string(rune(intMsg))
 	}
@@ -91,8 +88,8 @@ func DecryptMessage() string {
 	key_string := files.ReadFromFile("data/key.txt")
 	keys := strings.Split(key_string, " ")
 
-	a, err := strconv.Atoi(keys[0])
-	b, err2 := strconv.Atoi(keys[1])
+	a, err := strconv.Atoi(keys[1])
+	b, err2 := strconv.Atoi(keys[0])
 
 	if err != nil || err2 != nil {
 		log.Fatal(err)
@@ -126,14 +123,11 @@ func DecryptMessage() string {
 		}
 
 		if intMsg > 96 && intMsg < 123 {
-			intMsg = a * (intMsg - b)
-
-			if intMsg < 97 {
-				intMsg += 26
+			intMsg = a * ((intMsg - 97) - b)
+			if intMsg < 0 && intMsg%26 != 0 {
+				intMsg = ((intMsg % 26) + 26) + 97
 			} else {
-				for intMsg > 122 {
-					intMsg -= 26
-				}
+				intMsg = (intMsg % 26) + 97
 			}
 		}
 		message += string(rune(intMsg))
@@ -180,28 +174,25 @@ func FindKey() string {
 				}
 
 				if intMsg > 96 && intMsg < 123 {
-					intMsg = a * (intMsg - b)
-
-					if intMsg < 97 {
-						intMsg += 26
+					intMsg = a * ((intMsg - 97) - b)
+					if intMsg < 0 && intMsg%26 != 0 {
+						intMsg = ((intMsg % 26) + 26) + 97
 					} else {
-						for intMsg > 122 {
-							intMsg -= 26
-						}
+						intMsg = (intMsg % 26) + 97
 					}
 				}
 				message += string(rune(intMsg))
-			}
 
-			if message == extra {
-				keyA = strconv.Itoa(findCoprime(a))
-				keyB = strconv.Itoa(b)
+				if message == extra {
+					keyA = strconv.Itoa(findCoprime(a))
+					keyB = strconv.Itoa(b)
 
-				keysString := fmt.Sprintf("%v %v\n", keyA, keyB)
+					keysString := fmt.Sprintf("%v %v\n", keyB, keyA)
 
-				files.WriteToFile("data/key-new.txt", keysString)
+					files.WriteToFile("data/key-found.txt", keysString)
 
-				return keysString
+					return keysString
+				}
 			}
 
 			message = ""
@@ -240,14 +231,11 @@ func AllCodes() string {
 				}
 
 				if intMsg > 96 && intMsg < 123 {
-					intMsg = a * (intMsg - b)
-
-					if intMsg < 97 {
-						intMsg += 26
+					intMsg = a * ((intMsg - 97) - b)
+					if intMsg < 0 && intMsg%26 != 0 {
+						intMsg = ((intMsg % 26) + 26) + 97
 					} else {
-						for intMsg > 122 {
-							intMsg -= 26
-						}
+						intMsg = (intMsg % 26) + 97
 					}
 				}
 				message += string(rune(intMsg))

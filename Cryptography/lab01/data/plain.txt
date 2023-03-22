@@ -1,1 +1,1 @@
-AFFINE CIPHER
+Zadanie z kryptografii
