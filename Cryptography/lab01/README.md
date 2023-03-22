@@ -1,1 +1,30 @@
 # Affine and caesar ciphers
+
+# Uruchamianie
+
+./lab01.exe <p1> <p2> lub go run main.go <p1> <p2>
+
+# Parametry
+
+## P1
+
+-c (szyfr Cezara)
+-a (szyfr afiniczny)
+
+## P2
+
+-e (szyfrowanie)
+-d (odszyfrowywanie)
+-j (kryptoanaliza z tekstem jawnym)
+-k (kryptoanaliza wyłącznie w oparciu o kryptogram)
+
+# Inne
+
+Pliki z danymi znajdują się w folderze `/data`
+Plik główny nazywa się `main.go`
+Plik wykonywalny .exe nazywa się `lab01.exe`
+Plik z szyfrem cezara jest w folderze `/ceasar`
+Plik z szyfrem afinicznym jest w folderze `/affine`
+Plik z operacjami na plikach jest w folderze `/files`
+
+Klucze podawane będą z terminala podczas podania paramteru -e

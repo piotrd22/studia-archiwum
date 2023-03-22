@@ -18,8 +18,9 @@ Inne
 
 Pliki z danymi znajdują się w folderze ``/data``
 Plik główny nazywa się ``main.go``
+Plik wykonywalny .exe nazywa się ``lab01.exe``
 Plik z szyfrem cezara jest w folderze ``/ceasar``
-Plik z szyfrem afiniczny jest w folderze ``/affine``
+Plik z szyfrem afinicznym jest w folderze ``/affine``
 Plik z operacjami na plikach jest w folderze ``/files``
 
 Klucze podawane będą z terminala podczas podania paramteru -e
