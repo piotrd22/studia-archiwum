@@ -199,7 +199,7 @@ func FindKey() string {
 
 				keysString := fmt.Sprintf("%v %v\n", keyA, keyB)
 
-				files.WriteToFile("data/key-found.txt", keysString)
+				files.WriteToFile("data/key-new.txt", keysString)
 
 				return keysString
 			}
