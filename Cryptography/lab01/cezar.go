@@ -7,11 +7,9 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strconv"
 
 	"github.com/piotrd22/studia-archiwum/Cryptography/lab01/affine"
 	"github.com/piotrd22/studia-archiwum/Cryptography/lab01/caesar"
-	"github.com/piotrd22/studia-archiwum/Cryptography/lab01/files"
 )
 
 func main() {
@@ -31,24 +29,12 @@ func main() {
 	cipher := os.Args[1]
 	action := os.Args[2]
 
-	var key int
-	var a, b int
-
 	switch cipher {
 	case "-c":
 		fmt.Println("Caesar!")
 
 		switch action {
 		case "-e":
-			fmt.Print("Enter the key (an integer from 1 to 25): ")
-			fmt.Scanln(&key)
-
-			if key < 1 || key > 25 {
-				log.Fatal("Invalid key")
-			}
-
-			files.WriteToFile("data/key.txt", strconv.Itoa(key))
-
 			caesar.EncryptMessage()
 			fmt.Println("All done")
 
@@ -73,15 +59,6 @@ func main() {
 
 		switch action {
 		case "-e":
-			fmt.Println("Enter the key (two integers a and b separated by a space): ")
-			fmt.Scanln(&a, &b)
-
-			if a < 1 || a > 25 || b < 1 || b > 25 {
-				log.Fatal("Invalid key")
-			}
-
-			files.WriteToFile("data/key.txt", fmt.Sprintf("%v %v", a, b))
-
 			affine.EncryptMessage()
 			fmt.Println("All done")
 
