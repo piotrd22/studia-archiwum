@@ -3,7 +3,7 @@
 docker volume create nginx_data
 
 docker run -d \
-  --name lab01zad1 \
+  --name lab04zad1 \
   -p 80:80 \
   -v nginx_data:/usr/share/nginx/html \
   nginx
