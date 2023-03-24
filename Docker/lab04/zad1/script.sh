@@ -7,18 +7,10 @@ docker run -d \
   -p 80:80 \
   -v nginx_data:/usr/share/nginx/html \
   nginx
-
-echo "Hello World!" > \\\\wsl$\\docker-desktop-data\\data\\docker\\volumes\\nginx_data\\_data\\index.html
+  
+docker exec -it lab04zad1 sh -c "echo 'Hello World!' > /usr/share/nginx/html/index.html"
 
 if [[ $(curl -s localhost) == *"Hello World!"* ]]; then
-  echo "Nginx server is working correctly."
-else
-  echo "Nginx server is not working correctly."
-fi
-
-echo "Changes" > \\\\wsl$\\docker-desktop-data\\data\\docker\\volumes\\nginx_data\\_data\\index.html
-
-if [[ $(curl -s localhost) == *"Changes"* ]]; then
   echo "Nginx server is working correctly."
 else
   echo "Nginx server is not working correctly."
