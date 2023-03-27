@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ARG PYTHON_VERSION=3.11.1
+ARG PYTHON_VERSION=3.9.2
 ARG SERVER_PORT=5000
 
 ENV PYTHON_VERSION=$PYTHON_VERSION
@@ -21,12 +21,12 @@ RUN cd /opt \
 
 RUN cd /opt/Python-${PYTHON_VERSION} \ 
     && ./configure --prefix=/usr --enable-optimizations --with-ensurepip=install \
-    && make install \
+    && make install
 
 COPY ./myapp /myapp
 WORKDIR /myapp
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 EXPOSE ${PORT}
 
-CMD ["python", "app.py"]
+CMD ["python3", "app.py"]
