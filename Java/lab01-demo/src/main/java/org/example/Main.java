@@ -2,6 +2,8 @@ package org.example;
 
 import org.example.stack.Stack;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         Stack stack = new Stack();
