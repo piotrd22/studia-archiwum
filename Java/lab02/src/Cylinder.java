@@ -5,7 +5,7 @@ public class Cylinder {
     public Cylinder() {}
 
     public Cylinder(double radius, double height) {
-        if (radius <= 0 || height <= 0) {
+        if (radius < 0 || height < 0) {
             throw new IllegalArgumentException("Values must be positive");
         }
         this.radius = radius;
@@ -17,7 +17,7 @@ public class Cylinder {
     }
 
     public void setRadius(double radius) {
-        if (radius <= 0) {
+        if (radius < 0) {
             throw new IllegalArgumentException("Radius must be positive");
         }
         this.radius = radius;
@@ -28,25 +28,15 @@ public class Cylinder {
     }
 
     public void setHeight(double height) {
-        if (height <= 0) {
+        if (height < 0) {
             throw new IllegalArgumentException("Height must be positive");
         }
         this.height = height;
     }
 
-    public double baseSurfaceArea() {
-        if (radius <= 0 || height <= 0) {
-            throw new IllegalArgumentException("Values must be positive");
-        }
-        return Math.PI * Math.pow(radius, 2);
-    }
+    public double baseSurfaceArea() { return Math.PI * Math.pow(radius, 2); }
 
-    public double sideSurfaceArea() {
-        if (radius <= 0 || height <= 0) {
-            throw new IllegalArgumentException("Values must be positive");
-        }
-        return 2 * Math.PI * radius * height;
-    }
+    public double sideSurfaceArea() { return 2 * Math.PI * radius * height; }
 
     public double surfaceArea() { return 2 * baseSurfaceArea() + sideSurfaceArea(); }
 
