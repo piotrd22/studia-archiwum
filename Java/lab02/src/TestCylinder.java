@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+
 public class TestCylinder {
     private Cylinder cylinder;
 
@@ -11,7 +12,7 @@ public class TestCylinder {
 
     @Test
     public void baseSurfaceArea() {
-        double result = Math.PI * Math.pow(10, 2);
+        double result = Math.PI * Math.pow(cylinder.getRadius(), 2);
         assertEquals(result, cylinder.baseSurfaceArea(), 3);
     }
 
