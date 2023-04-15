@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  db:
+    container_name: db
+    image: postgres:latest
+    networks:
+      - my_network
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - 5432:5432
+
+  web:
+    container_name: web
+    build: ./nginx
+    networks:
+      - my_network
+    ports:
+      - 80:80
+    depends_on:
+      - db
+
+networks:
+  my_network:
+    driver: bridge
