@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Calendar calendar = new Calendar();
+        ArrayCalendar calendar = new ArrayCalendar(14);
         int option;
         boolean isRunning = true;
         while (isRunning) {
@@ -12,12 +12,12 @@ public class Main {
             option = scanner.nextInt();
             try {
                 switch (option) {
-                    case 1 -> System.out.println(calendar.checkMeetingFromDay(Day.transformDay(scanner.nextInt())));
-                    case 2 -> System.out.println(calendar.checkMeetingFromDayAndPriority(Day.transformDay(scanner.nextInt()),
+                    case 1 -> System.out.println(calendar.checkMeetingFromDay(scanner.nextInt()));
+                    case 2 -> System.out.println(calendar.checkMeetingFromDayAndPriority(scanner.nextInt(),
                             Priority.transfromPriority(scanner.nextInt())));
                     case 3 -> printAndAddToCalendar(calendar, scanner);
                     case 4 -> printAndDeleteMeeting(calendar, scanner);
-                    case 5 -> calendar.deleteMeetingFromWholeDay(Day.transformDay(scanner.nextInt()));
+                    case 5 -> calendar.deleteMeetingFromWholeDay(scanner.nextInt());
                     case 6 -> isRunning = false;
                     default -> System.out.println("Invalid option!");
                 }
@@ -30,18 +30,18 @@ public class Main {
     private static void printMenu() {
         System.out.println("""
                 Menu:\s
-                1 - Get meetings by day (1-7)
-                2 - Get meeting by day (1-7) and priority (1(LOW)-3(HIGH))
+                1 - Get meetings by day
+                2 - Get meeting by day and priority (1(LOW)-3(HIGH))
                 3 - Add new meeting
                 4 - Delete meeting
-                5 - Delete meeting by day (1-7)
+                5 - Delete meeting by day
                 6 - Exit
                 """);
     }
 
-    private static void printAndAddToCalendar(Calendar calendar, Scanner scanner) throws Exception {
-        System.out.println("Add a day (1-7)");
-        Day day = Day.transformDay(scanner.nextInt());
+    private static void printAndAddToCalendar(ArrayCalendar calendar, Scanner scanner) throws Exception {
+        System.out.println("Add a day");
+        int day = scanner.nextInt();
         System.out.println("Add description");
         String desc = scanner.next();
         System.out.println("Add start date, for example 10:00:00");
@@ -54,9 +54,9 @@ public class Main {
         calendar.addMeeting(day, desc, start, end, priority);
     }
 
-    private static void printAndDeleteMeeting(Calendar calendar, Scanner scanner) throws Exception {
-        System.out.println("Add a day (1-7)");
-        Day day = Day.transformDay(scanner.nextInt());
+    private static void printAndDeleteMeeting(ArrayCalendar calendar, Scanner scanner) {
+        System.out.println("Add a day");
+        int day = scanner.nextInt();
         System.out.println("Add ID of meeting (seen in option 1)");
         int id = scanner.nextInt();
 
