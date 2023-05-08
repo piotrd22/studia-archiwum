@@ -1,5 +1,6 @@
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 public class ArrayCalendar {
     private final ArrayList<ArrayList<Meeting>> calendar;
@@ -21,40 +22,25 @@ public class ArrayCalendar {
         meetings.add(meeting);
     }
 
-    public void deleteMeetingFromDay(int day, int Id) {
+    public void deleteMeetingFromDay(int day, int id) {
         ArrayList<Meeting> meetings = calendar.get(day - 1);
-        meetings.remove(Id );
+        meetings.remove(id);
     }
 
     public void deleteMeetingFromWholeDay(int day) {
         calendar.get(day - 1).clear();
     }
 
-    public String checkMeetingFromDay(int day) {
-        StringBuilder output = new StringBuilder();
-        ArrayList<Meeting> dayOfMeeting = calendar.get(day - 1);
+    public ArrayList<Meeting> checkMeetingFromDay(int day, Predicate<Meeting> func) {
+        ArrayList<Meeting> dayOfMeetings = calendar.get(day - 1);
+        ArrayList<Meeting> output = new ArrayList<>();
 
-        for (int i = 0; i < dayOfMeeting.size(); i++) {
-            output.append("ID: %s, ".formatted(i));
-            output.append(dayOfMeeting.get(i).toString());
-            output.append("\n");
-        }
-
-        return output.toString();
-    }
-
-    public String checkMeetingFromDayAndPriority(int day, Priority priority) {
-        StringBuilder output = new StringBuilder();
-        ArrayList<Meeting> dayOfMeeting = calendar.get(day - 1);
-
-        for (int i = 0; i < dayOfMeeting.size(); i++) {
-            if (dayOfMeeting.get(i).getPriority() == priority) {
-                output.append("ID: %s, ".formatted(i));
-                output.append(dayOfMeeting.get(i).toString());
-                output.append("\n");
+        for (Meeting meeting : dayOfMeetings) {
+            if (func.test(meeting)) {
+                output.add(meeting);
             }
         }
 
-        return output.toString();
+        return output;
     }
 }

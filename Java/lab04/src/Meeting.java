@@ -20,6 +20,10 @@ public class Meeting {
         return priority;
     }
 
+    public LocalTime getStartDate() { return startDate; }
+
+    public LocalTime getEndDate() { return endDate; }
+
     @Override
     public String toString() {
         return "Description: %s, Start: %s, End: %s, Priority: %s".formatted(description, startDate, endDate, priority);

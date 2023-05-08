@@ -1,5 +1,7 @@
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,13 +14,15 @@ public class Main {
             option = scanner.nextInt();
             try {
                 switch (option) {
-                    case 1 -> System.out.println(calendar.checkMeetingFromDay(scanner.nextInt()));
-                    case 2 -> System.out.println(calendar.checkMeetingFromDayAndPriority(scanner.nextInt(),
-                            Priority.transfromPriority(scanner.nextInt())));
-                    case 3 -> printAndAddToCalendar(calendar, scanner);
-                    case 4 -> printAndDeleteMeeting(calendar, scanner);
-                    case 5 -> calendar.deleteMeetingFromWholeDay(scanner.nextInt());
-                    case 6 -> isRunning = false;
+                    case 1 -> printAndAddToCalendar(scanner, calendar);
+                    case 2 -> printAndDeleteMeeting(scanner, calendar);
+                    case 3 -> printAndDeleteMeetingFromWholeDay(scanner, calendar);
+                    case 4 -> printCheckMeetingFromDay(scanner, calendar);
+                    case 5 -> printCheckMeetingFromDayAndPriority(scanner, calendar);
+                    case 6 -> printCheckMeetingFromDayAndTime(scanner, calendar);
+                    case 7 -> printCheckMeetingFromDayAndBetweenTimes(scanner, calendar);
+                    case 8 -> printCheckMeetingFromDayPriorityAndTime(scanner, calendar);
+                    case 9 -> isRunning = false;
                     default -> System.out.println("Invalid option!");
                 }
             } catch (Exception e) {
@@ -30,16 +34,19 @@ public class Main {
     private static void printMenu() {
         System.out.println("""
                 Menu:\s
-                1 - Get meetings by day
-                2 - Get meeting by day and priority (1(LOW)-3(HIGH))
-                3 - Add new meeting
-                4 - Delete meeting
-                5 - Delete meeting by day
-                6 - Exit
+                1 - Add new meeting
+                2 - Delete meeting
+                3 - Delete meetings from whole day
+                4 - Get all meetings by day
+                5 - Get all meetings by day and priority (1(LOW)-3(HIGH))
+                6 - Get all meetings by day and after start hour
+                7 - Get all meetings by day and between start and end hour
+                8 - Get all meetings by day, after start hour and priority
+                9 - Exit
                 """);
     }
 
-    private static void printAndAddToCalendar(ArrayCalendar calendar, Scanner scanner) throws Exception {
+    private static void printAndAddToCalendar(Scanner scanner, ArrayCalendar calendar) throws Exception {
         System.out.println("Add a day");
         int day = scanner.nextInt();
         System.out.println("Add description");
@@ -54,12 +61,87 @@ public class Main {
         calendar.addMeeting(day, desc, start, end, priority);
     }
 
-    private static void printAndDeleteMeeting(ArrayCalendar calendar, Scanner scanner) {
+    private static void printAndDeleteMeeting(Scanner scanner, ArrayCalendar calendar) {
         System.out.println("Add a day");
         int day = scanner.nextInt();
-        System.out.println("Add ID of meeting (seen in option 1)");
+        printCheckMeetingFromDay(day, calendar);
+        System.out.println("Add ID of meeting");
         int id = scanner.nextInt();
-
         calendar.deleteMeetingFromDay(day, id);
+        System.out.println("Ok");
+    }
+
+    private static void printCheckMeetingFromDay(int day, ArrayCalendar calendar) {
+        Predicate<Meeting> func = (meeting) -> true;
+        ArrayList<Meeting> arr = calendar.checkMeetingFromDay(day, func);
+        meetingsPrinter(arr);
+    }
+
+    private static void printAndDeleteMeetingFromWholeDay(Scanner scanner, ArrayCalendar calendar) {
+        System.out.println("Add a day");
+        int day = scanner.nextInt();
+        calendar.deleteMeetingFromWholeDay(day);
+        System.out.println("Ok");
+    }
+
+    private static void printCheckMeetingFromDay(Scanner scanner, ArrayCalendar calendar) {
+        System.out.println("Add a day");
+        Predicate<Meeting> func = (meeting) -> true;
+        ArrayList<Meeting> arr = calendar.checkMeetingFromDay(scanner.nextInt(), func);
+        meetingsPrinter(arr);
+    }
+
+    private static void printCheckMeetingFromDayAndPriority(Scanner scanner, ArrayCalendar calendar) throws Exception {
+        System.out.println("Number of priority (1-3)");
+        Priority priority = Priority.transfromPriority(scanner.nextInt());
+        Predicate<Meeting> func = (meeting) -> meeting.getPriority() == priority;
+        System.out.println("Number of day");
+        ArrayList<Meeting> arr = calendar.checkMeetingFromDay(scanner.nextInt(), func);
+        meetingsPrinter(arr);
+    }
+
+    private static void printCheckMeetingFromDayAndTime(Scanner scanner, ArrayCalendar calendar) {
+        System.out.println("Add start date, for example 10:00:00");
+        LocalTime start = LocalTime.parse(scanner.next());
+        Predicate<Meeting> func = (meeting) -> meeting.getStartDate().isAfter(start);
+        System.out.println("Number of day");
+        ArrayList<Meeting> arr = calendar.checkMeetingFromDay(scanner.nextInt(), func);
+        meetingsPrinter(arr);
+    }
+
+    private static void printCheckMeetingFromDayAndBetweenTimes(Scanner scanner, ArrayCalendar calendar) {
+        System.out.println("Add start date, for example 10:00:00");
+        LocalTime start = LocalTime.parse(scanner.next());
+        System.out.println("Add end date, for example 10:00:00");
+        LocalTime end = LocalTime.parse(scanner.next());
+        System.out.println("Number of day");
+        Predicate<Meeting> func = (meeting) ->
+                meeting.getStartDate().isAfter(start) && meeting.getEndDate().isBefore(end);
+        ArrayList<Meeting> arr = calendar.checkMeetingFromDay(scanner.nextInt(), func);
+        meetingsPrinter(arr);
+    }
+
+    private static void printCheckMeetingFromDayPriorityAndTime(Scanner scanner, ArrayCalendar calendar) throws Exception {
+        System.out.println("Add start date, for example 10:00:00");
+        LocalTime start = LocalTime.parse(scanner.next());
+        System.out.println("Number of priority (1-3)");
+        Priority priority = Priority.transfromPriority(scanner.nextInt());
+        System.out.println("Number of day");
+        Predicate<Meeting> func = (meeting) ->
+                meeting.getStartDate().isAfter(start) && meeting.getPriority() == priority;
+        ArrayList<Meeting> arr = calendar.checkMeetingFromDay(scanner.nextInt(), func);
+        meetingsPrinter(arr);
+    }
+
+    private static void meetingsPrinter(ArrayList<Meeting> arr) {
+        StringBuilder output = new StringBuilder();
+
+        for (int i = 0; i < arr.size(); i++) {
+            output.append("ID: %s, ".formatted(i));
+            output.append(arr.get(i).toString());
+            output.append("\n");
+        }
+
+        System.out.println(output);
     }
 }
