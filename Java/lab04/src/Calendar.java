@@ -1,59 +1,46 @@
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.function.Predicate;
 
 public class Calendar {
-    private final HashMap<Day, ArrayList<Meeting>> calendar;
+    private ArrayList<ArrayList<Meeting>> calendar;
 
     public Calendar() {
-        this.calendar = new HashMap<>();
-        this.calendar.put(Day.MONDAY, new ArrayList<>());
-        this.calendar.put(Day.TUESDAY, new ArrayList<>());
-        this.calendar.put(Day.WEDNESDAY, new ArrayList<>());
-        this.calendar.put(Day.THURSDAY, new ArrayList<>());
-        this.calendar.put(Day.FRIDAY, new ArrayList<>());
-        this.calendar.put(Day.SATURDAY, new ArrayList<>());
-        this.calendar.put(Day.SUNDAY, new ArrayList<>());
+        this(7);
     }
 
-    public void addMeeting(Day dayOfTheWeek, String description, LocalTime startDate, LocalTime endDate, Priority priority) throws Exception {
-        Meeting meeting = new Meeting(description, startDate, endDate, priority);
-        calendar.get(dayOfTheWeek).add(meeting);
-    }
-
-    public void deleteMeetingFromDay(Day dayOfTheWeek, int id) {
-        calendar.get(dayOfTheWeek).remove(id);
-    }
-
-    public void deleteMeetingFromWholeDay(Day dayOfTheWeek) {
-        calendar.get(dayOfTheWeek).clear();
-    }
-
-    public String checkMeetingFromDay(Day dayOfTheWeek) {
-        StringBuilder output = new StringBuilder();
-        ArrayList<Meeting> dayOfMeeting = calendar.get(dayOfTheWeek);
-
-        for (int i = 0; i < dayOfMeeting.size(); i++) {
-            output.append("ID: %s, ".formatted(i));
-            output.append(dayOfMeeting.get(i).toString());
-            output.append("\n");
+    public Calendar(int numberOfDays) {
+        calendar = new ArrayList<>(numberOfDays);
+        for (int i = 0; i < numberOfDays; i++) {
+            calendar.add(new ArrayList<>());
         }
-
-        return output.toString();
     }
 
-    public String checkMeetingFromDayAndPriority(Day dayOfTheWeek, Priority priority) {
-        StringBuilder output = new StringBuilder();
-        ArrayList<Meeting> dayOfMeeting = calendar.get(dayOfTheWeek);
+    public void addMeeting(int day, String desc, LocalTime startTime, LocalTime endTime, Priority priority) throws Exception {
+        Meeting meeting = new Meeting(desc, startTime, endTime, priority);
+        ArrayList<Meeting> meetings = calendar.get(day - 1);
+        meetings.add(meeting);
+    }
 
-        for (int i = 0; i < dayOfMeeting.size(); i++) {
-            if (dayOfMeeting.get(i).getPriority() == priority) {
-                output.append("ID: %s, ".formatted(i));
-                output.append(dayOfMeeting.get(i).toString());
-                output.append("\n");
+    public void deleteMeetingFromDay(int day, int id) {
+        ArrayList<Meeting> meetings = calendar.get(day - 1);
+        meetings.remove(id);
+    }
+
+    public void deleteMeetingFromWholeDay(int day) {
+        calendar.get(day - 1).clear();
+    }
+
+    public ArrayList<Meeting> checkMeetingFromDay(int day, Predicate<Meeting> func) {
+        ArrayList<Meeting> dayOfMeetings = calendar.get(day - 1);
+        ArrayList<Meeting> output = new ArrayList<>();
+
+        for (Meeting meeting : dayOfMeetings) {
+            if (func.test(meeting)) {
+                output.add(meeting);
             }
         }
 
-        return output.toString();
+        return output;
     }
 }

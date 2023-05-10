@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayCalendar calendar = new ArrayCalendar(14);
+        Calendar calendar = new Calendar();
         int option;
         boolean isRunning = true;
         while (isRunning) {
@@ -46,7 +46,7 @@ public class Main {
                 """);
     }
 
-    private static void printAndAddToCalendar(Scanner scanner, ArrayCalendar calendar) throws Exception {
+    private static void printAndAddToCalendar(Scanner scanner, Calendar calendar) throws Exception {
         System.out.println("Add a day");
         int day = scanner.nextInt();
         System.out.println("Add description");
@@ -61,7 +61,7 @@ public class Main {
         calendar.addMeeting(day, desc, start, end, priority);
     }
 
-    private static void printAndDeleteMeeting(Scanner scanner, ArrayCalendar calendar) {
+    private static void printAndDeleteMeeting(Scanner scanner, Calendar calendar) {
         System.out.println("Add a day");
         int day = scanner.nextInt();
         printCheckMeetingFromDay(day, calendar);
@@ -71,27 +71,27 @@ public class Main {
         System.out.println("Ok");
     }
 
-    private static void printCheckMeetingFromDay(int day, ArrayCalendar calendar) {
+    private static void printCheckMeetingFromDay(int day, Calendar calendar) {
         Predicate<Meeting> func = (meeting) -> true;
         ArrayList<Meeting> arr = calendar.checkMeetingFromDay(day, func);
         meetingsPrinter(arr);
     }
 
-    private static void printAndDeleteMeetingFromWholeDay(Scanner scanner, ArrayCalendar calendar) {
+    private static void printAndDeleteMeetingFromWholeDay(Scanner scanner, Calendar calendar) {
         System.out.println("Add a day");
         int day = scanner.nextInt();
         calendar.deleteMeetingFromWholeDay(day);
         System.out.println("Ok");
     }
 
-    private static void printCheckMeetingFromDay(Scanner scanner, ArrayCalendar calendar) {
+    private static void printCheckMeetingFromDay(Scanner scanner, Calendar calendar) {
         System.out.println("Add a day");
         Predicate<Meeting> func = (meeting) -> true;
         ArrayList<Meeting> arr = calendar.checkMeetingFromDay(scanner.nextInt(), func);
         meetingsPrinter(arr);
     }
 
-    private static void printCheckMeetingFromDayAndPriority(Scanner scanner, ArrayCalendar calendar) throws Exception {
+    private static void printCheckMeetingFromDayAndPriority(Scanner scanner, Calendar calendar) throws Exception {
         System.out.println("Number of priority (1-3)");
         Priority priority = Priority.transfromPriority(scanner.nextInt());
         Predicate<Meeting> func = (meeting) -> meeting.getPriority() == priority;
@@ -100,7 +100,7 @@ public class Main {
         meetingsPrinter(arr);
     }
 
-    private static void printCheckMeetingFromDayAndTime(Scanner scanner, ArrayCalendar calendar) {
+    private static void printCheckMeetingFromDayAndTime(Scanner scanner, Calendar calendar) {
         System.out.println("Add start date, for example 10:00:00");
         LocalTime start = LocalTime.parse(scanner.next());
         Predicate<Meeting> func = (meeting) -> meeting.getStartDate().isAfter(start);
@@ -109,7 +109,7 @@ public class Main {
         meetingsPrinter(arr);
     }
 
-    private static void printCheckMeetingFromDayAndBetweenTimes(Scanner scanner, ArrayCalendar calendar) {
+    private static void printCheckMeetingFromDayAndBetweenTimes(Scanner scanner, Calendar calendar) {
         System.out.println("Add start date, for example 10:00:00");
         LocalTime start = LocalTime.parse(scanner.next());
         System.out.println("Add end date, for example 10:00:00");
@@ -121,7 +121,7 @@ public class Main {
         meetingsPrinter(arr);
     }
 
-    private static void printCheckMeetingFromDayPriorityAndTime(Scanner scanner, ArrayCalendar calendar) throws Exception {
+    private static void printCheckMeetingFromDayPriorityAndTime(Scanner scanner, Calendar calendar) throws Exception {
         System.out.println("Add start date, for example 10:00:00");
         LocalTime start = LocalTime.parse(scanner.next());
         System.out.println("Number of priority (1-3)");
