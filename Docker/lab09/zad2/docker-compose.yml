@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  db:
+    image: mongo
+    platform: linux/amd64
+    ports:
+      - 27017:27017
+
+  api:
+    build: ./app
+    platform: linux/arm64
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
