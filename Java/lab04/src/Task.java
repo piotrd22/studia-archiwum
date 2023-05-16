@@ -8,8 +8,13 @@ public final class Task extends AbstractEntry {
         this.status = status;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     @Override
-    public String entryDetails() {
-        return String.format("Status: %s", status);
+    public String toString() {
+        return String.format("%s, Status: %s",
+                super.toString(), status);
     }
 }

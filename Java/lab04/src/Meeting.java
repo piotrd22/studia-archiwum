@@ -13,7 +13,8 @@ public final class Meeting extends AbstractEntry {
     }
 
     @Override
-    public String entryDetails() {
-        return String.format("Priority: %s", priority);
+    public String toString() {
+        return String.format("%s, Priority: %s",
+                super.toString(), priority);
     }
 }

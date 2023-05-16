@@ -20,11 +20,10 @@ sealed abstract class AbstractEntry permits Task, Meeting {
 
     public String getDescription() { return description; }
 
-    public abstract String entryDetails();
 
     @Override
     public String toString() {
-        return String.format("Description: %s, Start: %s, End: %s, %s",
-                description, startDate, endDate, entryDetails());
+        return String.format("Description: %s, Start: %s, End: %s",
+                description, startDate, endDate);
     }
 }

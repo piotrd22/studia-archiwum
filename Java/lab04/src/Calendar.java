@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.function.Predicate;
 
 public class Calendar {
-    private ArrayList<ArrayList<Meeting>> calendar;
+    private ArrayList<ArrayList<AbstractEntry>> calendar;
 
     public Calendar() {
         this(7);
@@ -18,24 +18,30 @@ public class Calendar {
 
     public void addMeeting(int day, String desc, LocalTime startTime, LocalTime endTime, Priority priority) throws Exception {
         Meeting meeting = new Meeting(desc, startTime, endTime, priority);
-        ArrayList<Meeting> meetings = calendar.get(day - 1);
+        ArrayList<AbstractEntry> meetings = calendar.get(day - 1);
         meetings.add(meeting);
     }
 
-    public void deleteMeetingFromDay(int day, int id) {
-        ArrayList<Meeting> meetings = calendar.get(day - 1);
+    public void addTask(int day, String desc, LocalTime startTime, LocalTime endTime, Status status) throws Exception {
+        Task task = new Task(desc, startTime, endTime, status);
+        ArrayList<AbstractEntry> meetings = calendar.get(day - 1);
+        meetings.add(task);
+    }
+
+    public void deleteEntryFromDay(int day, int id) {
+        ArrayList<AbstractEntry> meetings = calendar.get(day - 1);
         meetings.remove(id);
     }
 
-    public void deleteMeetingFromWholeDay(int day) {
+    public void deleteEntriesFromWholeDay(int day) {
         calendar.get(day - 1).clear();
     }
 
-    public ArrayList<Meeting> checkMeetingFromDay(int day, Predicate<Meeting> func) {
-        ArrayList<Meeting> dayOfMeetings = calendar.get(day - 1);
-        ArrayList<Meeting> output = new ArrayList<>();
+    public ArrayList<AbstractEntry> checkEntryFromDay(int day, Predicate<AbstractEntry> func) {
+        ArrayList<AbstractEntry> dayOfMeetings = calendar.get(day - 1);
+        ArrayList<AbstractEntry> output = new ArrayList<>();
 
-        for (Meeting meeting : dayOfMeetings) {
+        for (AbstractEntry meeting : dayOfMeetings) {
             if (func.test(meeting)) {
                 output.add(meeting);
             }
