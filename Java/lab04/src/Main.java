@@ -52,7 +52,8 @@ public class Main {
         System.out.println("Add a day");
         int day = scanner.nextInt();
         System.out.println("Add description");
-        String desc = scanner.next();
+        scanner.nextLine();
+        String desc = scanner.nextLine();
         System.out.println("Add start date, for example 10:00:00");
         LocalTime start = LocalTime.parse(scanner.next());
         System.out.println("Add end date, for example 10:00:00");
