@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 
 sealed abstract class Property permits House, Apartment {
+    public static LocalDate TODAY = LocalDate.now();
+
     private String street;
     private String numberOf;
     private String city;
@@ -11,6 +13,7 @@ sealed abstract class Property permits House, Apartment {
 
     public Property(String street, String numberOf, String city, Double area, String postalCode, Double price, LocalDate date) throws Exception {
         if (area < 0 || price < 0) throw new Exception("Area and price must be higher than 0!");
+        if (date.isBefore(TODAY)) throw new Exception("Date is wrong!");
         this.street = street;
         this.numberOf = numberOf;
         this.city = city;

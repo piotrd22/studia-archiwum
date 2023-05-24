@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Predicate;
@@ -15,8 +14,8 @@ public class Main {
             option = scanner.nextInt();
             try {
                 switch (option) {
-                    case 1 -> addHouse(scanner, offerList);
-                    case 2 -> addApartment(scanner, offerList);
+                    case 1 -> addOffer(scanner, offerList, 1);
+                    case 2 -> addOffer(scanner, offerList, 2);
                     case 3 -> printAllHouses(offerList);
                     case 4 -> printAllApartments(offerList);
                     case 5 -> printHousesWithCityAndLandArea(scanner, offerList);
@@ -29,8 +28,6 @@ public class Main {
             }
         }
     }
-
-    private static LocalDate TODAY = LocalDate.now();
 
     private static void printMenu() {
         System.out.println("""
@@ -45,7 +42,7 @@ public class Main {
                 """);
     }
 
-    private static void addHouse(Scanner scanner, OfferList offerList) throws Exception {
+    private static void addOffer(Scanner scanner, OfferList offerList, int choice) throws Exception {
         System.out.println("Enter street");
         String street = scanner.next();
         System.out.println("Add number of building");
@@ -60,48 +57,32 @@ public class Main {
         Double price = scanner.nextDouble();
         System.out.println("Add date YYYY-MM-DD");
         LocalDate date = LocalDate.parse(scanner.next());
-        System.out.println("Add land area in m^2");
-        Double landArea = scanner.nextDouble();
 
-        offerList.addHouse(street, numberOf, city, area, postalCode, price, date, landArea);
-    }
-
-    private static void addApartment(Scanner scanner, OfferList offerList) throws Exception {
-
-        System.out.println("Enter street");
-        String street = scanner.next();
-        System.out.println("Add number of building");
-        String numberOf = scanner.next();
-        System.out.println("Add number of apartment");
-        String numberOfApartString = scanner.next();
-        int numberOfApart = Integer.parseInt(numberOfApartString);
-        System.out.println("Add city");
-        String city = scanner.next();
-        System.out.println("Add area (for example 31.15) in m^2");
-        Double area = scanner.nextDouble();
-        System.out.println("Add postal code");
-        String postalCode = scanner.next();
-        System.out.println("Add price in PLN (for example 300000.0)");
-        Double price = scanner.nextDouble();
-        System.out.println("Add date YYYY-MM-DD");
-        LocalDate date = LocalDate.parse(scanner.next());
-        System.out.println("Add number of floor");
-        String numberOfFloorString = scanner.next();;
-        int numberOfFloor = Integer.parseInt(numberOfFloorString);
-
-        offerList.addApartment(street, numberOf, city, area, postalCode, price, date, numberOfFloor, numberOfApart);
+        if (choice == 1) {
+            System.out.println("Add land area in m^2");
+            Double landArea = scanner.nextDouble();
+            offerList.add(street, numberOf, city, area, postalCode, price, date, landArea);
+        } else {
+            System.out.println("Add number of apartment");
+            String numberOfApartString = scanner.next();
+            int numberOfApart = Integer.parseInt(numberOfApartString);
+            System.out.println("Add number of floor");
+            String numberOfFloorString = scanner.next();;
+            int numberOfFloor = Integer.parseInt(numberOfFloorString);
+            offerList.add(street, numberOf, city, area, postalCode, price, date, numberOfFloor, numberOfApart);
+        }
     }
 
     private static void printAllHouses(OfferList offerList) {
         Predicate<Property> predicate = (house) ->
-                house instanceof House && (house.getDate().isBefore(TODAY) || house.getDate().equals(TODAY));
+                house instanceof House && (house.getDate().isAfter(Property.TODAY) || house.getDate().equals(Property.TODAY));
         List<Property> arr = offerList.getProperties(predicate);
         propertyPrinter(arr);
     }
 
     private static void printAllApartments(OfferList offerList) {
         Predicate<Property> predicate = (apartment) ->
-                apartment instanceof Apartment && (apartment.getDate().isBefore(TODAY) || apartment.getDate().equals(TODAY));
+                apartment instanceof Apartment && (apartment.getDate().isAfter(Property.TODAY) || apartment.getDate().equals(Property.TODAY));
         List<Property> arr = offerList.getProperties(predicate);
         propertyPrinter(arr);
     }
@@ -114,7 +95,7 @@ public class Main {
 
         Predicate<Property> predicate = (house) ->
                 house instanceof House &&
-                        (house.getDate().isBefore(TODAY) || house.getDate().equals(TODAY)) &&
+                        (house.getDate().isAfter(Property.TODAY) || house.getDate().equals(Property.TODAY)) &&
                         house.getCity().equals(city) &&
                         ((House) house).getLandArea() >= landArea;
 
@@ -123,8 +104,6 @@ public class Main {
     }
 
     private static void printApartsWithCityPriceAndFloor(Scanner scanner, OfferList offerList) {
-        System.out.println("Add city");
-        String city = scanner.next();;
         System.out.println("Add price");
         Double price = scanner.nextDouble();
         System.out.println("Add min floor");
@@ -132,7 +111,7 @@ public class Main {
 
         Predicate<Property> predicate = (apartment) ->
                 apartment instanceof Apartment &&
-                        (apartment.getDate().isBefore(TODAY) || apartment.getDate().equals(TODAY)) &&
+                        (apartment.getDate().isAfter(Property.TODAY) || apartment.getDate().equals(Property.TODAY)) &&
                         ((Apartment) apartment).getNumberOfFloor() >= floor &&
                         apartment.getPrice() <= price;
 

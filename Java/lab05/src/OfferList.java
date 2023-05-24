@@ -10,13 +10,13 @@ public class OfferList {
         this.offerList = new ArrayList<>();
     }
 
-    public void addHouse(String street, String numberOf, String city, Double area, String postalCode, Double price, LocalDate date, Double landArea) throws Exception {
+    public void add(String street, String numberOf, String city, Double area, String postalCode, Double price, LocalDate date, Double landArea) throws Exception {
         House house = new House(street, numberOf, city, area, postalCode, price, date, landArea);
         offerList.add(house);
     }
 
 
-    public void addApartment(String street, String numberOf, String city, Double area, String postalCode, Double price, LocalDate date, int numberOfFloor, int numberOfApart) throws Exception {
+    public void add(String street, String numberOf, String city, Double area, String postalCode, Double price, LocalDate date, int numberOfFloor, int numberOfApart) throws Exception {
         Apartment apartment = new Apartment(street, numberOf, city, area, postalCode, price, date, numberOfFloor, numberOfApart);
         offerList.add(apartment);
     }
