@@ -1,0 +1,5 @@
+Stoi na stacji lokomotywa super ,
+\input{plikB.txt}
+Wagony do niej podoczepiali super ,
+\input{plikD.txt}
+A tych wagonów jest ze czterdzieści super . 
