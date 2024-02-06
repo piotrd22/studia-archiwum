@@ -1,0 +1,11 @@
+id,name,surname,email,date_of_birth
+1,John,Doe,johndoe@example.com,1990
+2,Jane,Smith,janesmith@example.com,1985
+3,Michael,Johnson,michaeljohnson@example.com,1980
+4,Emily,Williams,emilywilliams@example.com,1995
+5,William,Brown,williambrown@example.com,1992
+6,Susan,Davis,susandavis@example.com,1988
+7,David,Anderson,davidanderson@example.com,1975
+8,Sarah,Lee,sarahlee@example.com,1982
+9,James,Clark,jamesclark@example.com,1991
+10,Linda,Harris,lindaharris@example.com,1987

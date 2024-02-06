@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Restaurant</title>
+</head>
+<body>
+
+<h2>Add Restaurant</h2>
+
+<div th:if="${errorMessage}" class="error-message">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+<form th:method="post" th:action="@{/restaurants/add}">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required/>
+
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city" required/>
+
+    <label for="cuisine">Cuisine:</label>
+    <input type="text" id="cuisine" name="cuisine" required/>
+
+    <button type="submit">Add</button>
+</form>
+
+</body>
+</html>

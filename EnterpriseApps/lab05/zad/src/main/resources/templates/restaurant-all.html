@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>All restaurants</title>
+    <style>
+        .restaurant {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .error-message, .success-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <a href="/restaurants/add">Add</a>
+</div>
+
+<div th:if="${successMessage}" class="success-message">
+    <p th:text="${successMessage}"></p>
+</div>
+
+<div th:if="${errorMessage}" class="error-message">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+<div th:each="restaurant : ${allRestaurantsFromDb}" class="restaurant">
+    <div>ID: <span th:text="${restaurant.id}"></span></div>
+    <div>Name: <span th:text="${restaurant.name}"></span></div>
+    <div>City: <span th:text="${restaurant.city}"></span></div>
+    <div>Cuisine: <span th:text="${restaurant.cuisine}"></span></div>
+    <div>
+        <a th:href="@{/restaurants/delete/{id}(id=${restaurant.id})}">Delete</a>
+        <a th:href="@{/restaurants/update/{id}(id=${restaurant.id})}">Update</a>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,649 @@
+{
+	"info": {
+		"_postman_id": "5da9093d-ba3c-4189-98b8-8a7cde23e610",
+		"name": "AplikacjePrzemysłoweProjekt",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24037660"
+	},
+	"item": [
+		{
+			"name": "Restaurants",
+			"item": [
+				{
+					"name": "GetRestaurantById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/restaurants/1",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"restaurants",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateRestaurant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Noma\",\r\n    \"cuisine\": \"Duńska kuchnia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/restaurants/1",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"restaurants",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchRestaurants",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isMichelinStarred\": true,\r\n    \"minRating\": \"10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/restaurants/search?size=10&page=0&sort=createdAt,desc",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"restaurants",
+								"search"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "createdAt,desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateAddressInRestaurant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"zipCode\": \"Kod pocztowy 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/restaurants/1/address",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"restaurants",
+								"1",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteRestaurant",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/restaurants/1",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"restaurants",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetRestaurantsBySupplierId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/restaurants/supplier/2",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"restaurants",
+								"supplier",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddRestaurant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"El Bulli\",\r\n    \"cuisine\": \"Molecular\",\r\n    \"isMichelinStarred\": true,\r\n    \"foundingDate\": \"2000-11-20\",\r\n    \"numberOfEmployees\": 12\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/restaurants",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddAddressToRestuarant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"street\": \"Jana Bażynskiego\",\r\n    \"city\": \"Gdańsk\",\r\n    \"state\": \"Pomorskie\",\r\n    \"zipCode\": \"80-414\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/restaurants/5/address",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"restaurants",
+								"5",
+								"address"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rating",
+			"item": [
+				{
+					"name": "GetRatingById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/ratings/1",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"ratings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetRatingByRestaurantId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/ratings/restaurant/1?size=10&page=0&sort=createdAt,desc",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"ratings",
+								"restaurant",
+								"1"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "createdAt,desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddRating",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"score\": 8,\r\n    \"review\": \"Super!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/ratings/1",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"ratings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateRating",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"score\": 9\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/ratings/2",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"ratings",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteRating",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/ratings/2",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"ratings",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAverageRatingForRestaurant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/ratings/restaurant/score/1",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"ratings",
+								"restaurant",
+								"score",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Supplier",
+			"item": [
+				{
+					"name": "GetSupplier",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/suppliers/2",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"suppliers",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteSupplier",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/suppliers/2",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"suppliers",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetSuppliers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/suppliers?size=10&page=0&sort=createdAt,desc",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"suppliers"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "createdAt,desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddSupplier",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Frosta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/suppliers",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"suppliers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Agreement",
+			"item": [
+				{
+					"name": "GetAgreement",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/agreements/1",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"agreements",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddAgreement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurantId\": 1,\r\n    \"supplierId\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/agreements",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"agreements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAgreementsByRestuarantId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/agreements/restaurant/1?size=10&page=0&sort=createdAt,desc",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"agreements",
+								"restaurant",
+								"1"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "createdAt,desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAgreementsBySuplierId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/agreements/supplier/1?size=10&page=0&sort=createdAt,desc",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"agreements",
+								"supplier",
+								"1"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "createdAt,desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAgreement",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BACKEND_URL}}/api/agreements/1",
+							"host": [
+								"{{BACKEND_URL}}"
+							],
+							"path": [
+								"api",
+								"agreements",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BACKEND_URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
